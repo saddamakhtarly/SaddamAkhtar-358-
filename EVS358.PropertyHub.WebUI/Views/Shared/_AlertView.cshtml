@@ -1,0 +1,9 @@
+﻿@using EVS358.PropertyHub.WebUI.Models
+@model AlertModel
+
+
+<div class="alert alert-dismissible @Model.CSSClass">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong><span class="glyphicon @Model.Icon"></span> @Model.Heading</strong> @Model.Message
+</div>
+

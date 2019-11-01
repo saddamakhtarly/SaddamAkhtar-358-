@@ -1,0 +1,108 @@
+﻿@model CreatePropertyAdvModel
+
+<form asp-controller="propertyadvs" asp-action="create"  method="post" enctype="multipart/form-data" >
+    <div style="margin:0px 0px 15px 0px;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#genpane" data-toggle="tab">General</a></li>
+            <li><a href="#despane" data-toggle="tab">Description</a></li>
+            <li><a href="#imgpane" data-toggle="tab">Images</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="genpane" class="active tab-pane mytab-pane">
+                <div class="form-group form-inline">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+                        <select  class="form-control" asp-for="CityId"  asp-items="@ViewBag.Cities"></select>
+                    </div>
+                    <div id="forschemes" class="input-group">
+
+                    </div>
+                    <div id="forblocks" class="input-group">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                        <input asp-for="Name" type="text" class="form-control" placeholder="Title" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group col-lg-4">
+                        <span class="input-group-addon"><strong>Rs.</strong></span>
+                        <input asp-for="Price" type="number" min="0" class="form-control" placeholder="Price" />
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    <div class="input-group col-lg-3">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+                        <input asp-for="Area" type="number" class="form-control" placeholder="Area" />
+                    </div>
+                    <div class="input-group col-lg-2">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+                        <select class="form-control" asp-for="AreaUnitId"  asp-items="@ViewBag.AreaUnits" >
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    <div class="input-group col-lg-3">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+                        <select class="form-control" asp-for="PropertyTypeId" asp-items="@ViewBag.PropertyTypes" >                            
+                        </select>
+                    </div>
+                    <div class="input-group col-lg-2">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-bed"></span></span>
+                        <input asp-for="Beds" type="number" class="form-control" placeholder="Beds" />
+                    </div>
+                    <div class="input-group col-lg-2">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        <input asp-for="Baths" type="number" class="form-control" placeholder="Baths" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group col-lg-4">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        <input asp-for="StartDate" type="date" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    <div class="radio">
+                        @foreach (var item in ((List<SelectListItem>)ViewBag.AdvTypes))
+                        {
+
+                            <label style="padding-right:10px"><input name="advtype" asp-for="AdvType" value="@item.Value" type="radio" /> @item.Text </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    <div class="checkbox">
+                        @foreach (var item in (List<SelectListItem>)ViewBag.PropFeatures)
+                        {
+                            <label style="padding-right:10px"><input type="checkbox" value="@item.Value"  /> @item.Text </label>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div id="despane" class="tab-pane mytab-pane">
+                <textarea asp-for="Description"  class="form-control" rows="15"></textarea>
+            </div>
+            <div id="imgpane" class="tab-pane mytab-pane">
+                <input name="photo1" type="file" />
+                <input name="photo2" type="file" />
+                <input name="photo3" type="file" />
+                <input name="photo4" type="file" />
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp; Save</button>
+        <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-refresh"></span>&nbsp; Cancel</button>
+    </div>
+</form>

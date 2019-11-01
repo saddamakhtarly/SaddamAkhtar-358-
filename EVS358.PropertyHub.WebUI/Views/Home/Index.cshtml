@@ -1,0 +1,207 @@
+﻿@model IEnumerable<PropertyAdvSummaryModel>
+@{
+
+    ViewData["Title"] = "Home - PropertyHub";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="modal fade" id="dlgcreate" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="mydialog-header" class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 id="dlgcreate-hdr" class="modal-title">Property Detail</h4>
+            </div>
+            <div id="dlgcreate-bdy" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-img "style="background-image:url(images/banners/636972546434047581_2.jpg);">
+    <div style="background-color:darkblue; padding:10px;">
+        <partial name="_MainImageSliderView" />
+    </div>
+    
+    
+    <div style="margin-top:2%;">
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+
+            <div class="panel-body">
+                <form action="/" method="post">
+                    <div style="padding:20px">
+
+                        <div class="row">
+                            <div class="form-group form-inline">
+                                <div class="input-group col-lg-3" style=" margin-bottom:15px;">
+                                    <span id="cbCity" name="cbCity" class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                    <select class="form-control">
+                                        <option value="-1">--Select City--</option>
+                                        <option value='3'>Islamabad</option>
+                                        <option value='2'>Karachi</option>
+                                        <option value='1'>Lahore</option>
+
+                                    </select>
+
+                                </div>
+                                <div class="input-group col-lg-6" style=" margin-bottom:15px;">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+                                    <input id="txtLocation" name="txtLocation" type="text" class="form-control" placeholder="Location" />
+                                </div>
+
+                                <div class="input-group col-lg-2" style=" margin-bottom:15px;">
+                                    <button class="btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group form-inline">
+                                <div class="input-group col-lg-3" style=" margin-bottom:15px;">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-tag"></span></span>
+                                    <select class="form-control" id="cbType" name="cbType">
+                                        <option value="-1">-- Type --</option>
+                                        <option value="1">House</option>
+                                        <option value="2">Plot</option>
+                                        <option value="3">Factory</option>
+                                        <option value="4">Apartment</option>
+                                    </select>
+                                </div>
+                                <div class="input-group col-lg-4" style=" margin-bottom:15px;">
+                                    <span class="input-group-addon"><span class="glyphicon">Rs</span></span>
+                                    <input id="txtMinPrice" name="txtMinPrice" type="text" class="form-control" placeholder="Min Price" />
+                                </div>
+                                <div class="input-group col-lg-4" style=" margin-bottom:15px;">
+                                    <span class="input-group-addon"><span class="glyphicon">Rs</span></span>
+                                    <input id="txtMaxPrice" name="txtMaxPrice" type="text" class="form-control" placeholder="Max Price" />
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</div>
+    
+
+    
+
+
+
+    @foreach (var m in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div Id="Det" class="ptysum-item" data-DetailID="@m.Id" style="background-color:aliceblue; padding:5px;margin-bottom:30px; border:solid Blue 1px;">
+                <a href="#">
+                    <img src="@Url.Content(m.MainImageUrl)" data-evs-altsrc="@Url.Content(m.AlternateImageUrl)" alt="@m.Name" class="img-responsive evs-imgswap" style="width:200px;height:130px" />
+                    <div class="ptysum-info">
+                        <h2>@m.Name</h2>
+                        <p><strong>Rs.</strong>@m.Price/-</p>
+                        <p><span class="glyphicon glyphicon-map-marker"></span> @m.Location</p>
+                        <p>
+                            <span class="col-lg-6 col-p0"><span class="glyphicon glyphicon-equalizer"></span> @m.Area</span>
+                            <span class="col-lg-6 col-p0"><span class="glyphicon glyphicon-tag"></span> @m.Type</span>
+                        </p>
+                        <p>
+                            <span class="col-lg-6 col-p0"><span class="glyphicon glyphicon-bed"></span> @m.Beds Beds</span>
+                            <span class="col-lg-6 col-p0"><span class="glyphicon glyphicon-bed"></span> @m.Baths Baths</span>
+                        </p>
+                        <p><small><span class="glyphicon glyphicon-calendar"></span>@m.AdvAge</small></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
+    @section Scripts{
+        <script type="text/javascript">
+
+
+            $(".ptysum-item").click(function () {
+                var msglist = document.getElementById("Det");
+                var id = msglist.getAttribute("data-DetailID");
+                //var id = $(this).parents(".ptysum-item").data("DetailID");
+
+                $.ajax(
+                    {
+                        url: "/home/details/" + id
+                    }
+                ).done(function (updateform) {
+                    $("#dlgcreate-hdr").html("Property Detail");
+                    $("#dlgcreate-bdy").html(updateform);
+                    $("#dlgcreate").modal();
+
+                });
+            });
+
+
+
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+
+                //Live Search
+                $("input#searchtext").keyup(function () {
+                    var searchVal = $("input#searchtext").val();
+                    $("ul#livesearchul").empty();
+                    //alert(searchVal);
+                    //console.log(searchVal);
+                    if (searchVal == "" || searchVal == " ") {
+                        return false;
+                    }
+
+                    var url = "User/LiveSearch";
+
+                    //$.post(
+                    //    url, { searchVal: searchVal }, function (data) {
+
+                    //    }).done()
+
+                    $.ajax(
+                        {
+                            type: "POST",
+                            data: { searchVal: searchVal },
+                            url: "User/LiveSearch"
+                        }
+                    ).done(function (data) {
+                        //alert(data);
+                        for (var i = 0; i < data.length; i++) {
+                            var obj = data[i]
+                            //console.log(obj);
+                            //alert()
+                            //console.log(data[i].name);
+                            $("ul#livesearchul").append('<li class="userdiv" ><a href="' + obj.name + '">' + obj.name + ' </a>'+
+                                '<img class="userimg" src=' + obj.imageUrl + ' /> '+
+                                '</li > ');
+                        }
+                    });
+
+                });
+
+                $("body").on("click", "ul#livesearchul li", function () {
+                    $("ul#livesearchul").empty();
+                    $("input#searchtext").val("");
+                });
+
+   
+            });
+        </script>
+
+    }
+
+
+

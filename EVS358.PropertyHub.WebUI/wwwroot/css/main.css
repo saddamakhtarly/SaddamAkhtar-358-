@@ -1,0 +1,93 @@
+﻿
+
+.menu_userimage {
+    width: 20px;
+    height: 20px;
+}
+
+.pagefooter {
+    background-color: #808080;
+}
+
+.banner-image {
+    display: block;
+    width: 2000px;
+    height: 400px;
+}
+
+.bg-primary a {
+    color: #ffffff;
+}
+
+.mytab-pane {
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 15px;
+}
+
+/****** Style for property summary view *******/
+.ptysum-item {
+    border: solid 1px #d0d0d0;
+    padding: 10px;
+}
+
+.ptysum-info {
+    text-align: left;
+}
+
+.ptysum-item a {
+    text-decoration: none;
+    color: #909090;
+}
+
+.ptysum-item h2 {
+    color: #489636;
+    padding: 5px 0px;
+    margin: 5px 0px;
+    font-size: 125%;
+    font-weight: normal;
+}
+
+.ptysum-item p {
+    padding: 2px 0px;
+    margin: 2px 0px;
+}
+
+.ptysum-image {
+
+}
+
+.col-p0{
+    padding:0px;
+}
+
+
+.TopManu{
+
+    background-color:forestgreen;
+    color:white;
+    
+}
+.TopManu ul{
+    color:white;
+}
+.button {
+    background-color:#d0d0d0;
+    border: none;
+    color: black;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /*margin: 4px 2px;*/
+}
+
+.button2px {
+    border-radius: 2px;
+}
+
+
+
+

@@ -1,0 +1,222 @@
+﻿@model IEnumerable<PropertyAdvSummaryModel>
+
+@{
+    ViewData["Title"] = "Manage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="modal fade" id="dlgcreate" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="mydialog-header" class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 id="dlgcreate-hdr" class="modal-title">Add Property Advertisement</h4>
+            </div>
+            <div id="dlgcreate-bdy" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered">
+    <thead class="bg-primary">
+        <tr>
+            <th colspan="12">Manage Property Advertisements [ <a id="lnkaddporpadv" asp-action="create" asp-controller="propertyadvs">Add New</a> ]</th>
+        </tr>
+        <tr>
+            <th class="col-lg-1 col-md-1 col-sm-1 hidden-xs">
+                Image
+            </th>
+            <th class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Title</th>
+            <th class="col-lg-4 col-md-5 col-sm-5 col-xs-5">Location</th>
+            <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Price</th>
+            <th class="col-lg-2 col-md-1 col-sm-1 col-xs-1">Actions</th>
+        </tr>
+    </thead>
+   
+    <tbody id="tblcontactsbody">
+        @foreach (var m in Model)
+        {
+        <tr class="dg-datarow" data-propertytypeid="@m.Id">
+            <td class="col-lg-1 col-md-1 col-sm-1 hidden-xs">
+                <img src='@Url.Content(m.MainImageUrl)' class="img-responsive" alt="p-1" />
+            </td>
+            <td class="col-lg-3">@m.Name</td>
+            <td class="col-lg-4">@m.Location</td>
+            <td class="col-lg-2">@m.Price</td>
+            <td class="col-lg-2">
+                <button class="btn btn-warning btn-sm dgbtn-edit"><span class="glyphicon glyphicon-edit"></span></button> &nbsp;
+                <button class="btn btn-danger btn-sm dgbtn-delete"><span class="glyphicon glyphicon-trash"></span></button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts{ 
+    <script type="text/javascript">
+        $("#lnkaddporpadv").click(function (event) {
+            event.preventDefault();
+            $.ajax(
+                {
+                    url: "/propertyadvs/create"
+                }
+            ).done(function (createform) {
+                $("#dlgcreate-bdy").html(createform);
+                $("#dlgcreate-hdr").html("Add Property Advertisment");
+                
+                $("#dlgcreate").modal();
+                $("#CityId").change(function () {
+                    var cityid = $(this).find("option:selected").val();
+                   
+                    $.ajax(
+                        {
+                            url: "/propertyadvs/schemesddl/" + cityid
+                        }
+                    ).done(function (schemesddl) {
+                        $("#forschemes").html(schemesddl);
+                       
+                        $("#SchemeId").change(function () {
+                           
+                            var schemeid = $(this).find("option:selected").val();
+                            $.ajax(
+                                {
+                                    url: "/propertyadvs/blocksddL/" + schemeid
+                                }
+                            ).done(function (blocksddl) {
+                                $("#forblocks").html(blocksddl);
+                            });
+                        })
+                    });
+
+                });
+            });
+        });
+        $(".dgbtn-edit").click(function () {
+            var PId = $(this).parents(".dg-datarow").data("propertytypeid");
+            $.ajax(
+                {
+                    url: "/propertyadvs/update/" + PId
+                }
+            ).done(function (updateform) {
+                $("#dlgcreate-hdr").html("Edit  Property Advertisment");
+                $("#dlgcreate-bdy").html(updateform);
+      
+                $("#dlgcreate").modal();
+                $("#CityId").change(function () {
+                    var cityid = $(this).find("option:selected").val();
+
+                    $.ajax(
+                        {
+                            url: "/propertyadvs/schemesddl/" + cityid
+                        }
+                    ).done(function (schemesddl) {
+                        $("#forschemes").html(schemesddl);
+
+                        $("#SchemeId").change(function () {
+
+                            var schemeid = $(this).find("option:selected").val();
+                            $.ajax(
+                                {
+                                    url: "/propertyadvs/blocksddL/" + schemeid
+                                }
+                            ).done(function (blocksddl) {
+                                $("#forblocks").html(blocksddl);
+                            });
+                        })
+                    });
+
+                });
+
+            });
+        });
+
+        $(".dgbtn-delete").click(function () {
+            var PId = $(this).parents(".dg-datarow").data("propertytypeid");
+            $.ajax(
+                {
+                    url: "/propertyadvs/delete/" + PId
+                }
+            ).done(function (updateform) {
+                $("#dlgcreate-hdr").html("Delete  Property Advertisment");
+                $("#dlgcreate-bdy").html(updateform);
+
+                $("#dlgcreate").modal();
+                $("#CityId").change(function () {
+                    var cityid = $(this).find("option:selected").val();
+
+                    $.ajax(
+                        {
+                            url: "/propertyadvs/schemesddl/" + cityid
+                        }
+                    ).done(function (schemesddl) {
+                        $("#forschemes").html(schemesddl);
+
+                        $("#SchemeId").change(function () {
+
+                            var schemeid = $(this).find("option:selected").val();
+                            $.ajax(
+                                {
+                                    url: "/propertyadvs/blocksddL/" + schemeid
+                                }
+                            ).done(function (blocksddl) {
+                                $("#forblocks").html(blocksddl);
+                            });
+                        })
+                    });
+
+                });
+
+            });
+        });
+
+
+
+        //$("#lnkaddporpadv").click(function (event) {
+        //    even.preventDefault();
+         
+        //    $.ajax(
+        //        {
+        //            url: "/propertyadvs/Create"
+        //        }
+        //    ).done(function (createform) {
+        //        $("#dlgcreate-bdy").html(createform);
+        //        $("#dlgcreate").modal();
+        //        $("#CityId").change(function () {
+        //            var cityid = $(this).find("option:selected").val();
+
+        //            $.ajax(
+        //                {
+        //                    url: "/propertyadvs/schemesddl/" + cityid
+        //                }
+        //            ).done(function (schemesddl) {
+        //                $("#forschemes").html(schemesddl);
+
+        //                $("#SchemeId").change(function () {
+
+        //                    var schemeid = $(this).find("option:selected").val();
+        //                    $.ajax(
+        //                        {
+        //                            url: "/propertyadvs/blocksddL/" + schemeid
+        //                        }
+        //                    ).done(function (blocksddl) {
+        //                        $("#forblocks").html(blocksddl);
+        //                    });
+        //                })
+        //            });
+
+        //        });
+        //    });
+        //});
+
+
+
+
+       
+    </script>
+}
+

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVS358.PropertyHub.WebUI", "EVS358.PropertyHub.WebUI\EVS358.PropertyHub.WebUI.csproj", "{809AB5C4-EDC6-4F55-94AB-A11E026D08C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVS358", "EVS358\EVS358.csproj", "{8F8962D9-9AB4-4F48-9397-A63CC1286CD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{809AB5C4-EDC6-4F55-94AB-A11E026D08C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809AB5C4-EDC6-4F55-94AB-A11E026D08C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809AB5C4-EDC6-4F55-94AB-A11E026D08C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809AB5C4-EDC6-4F55-94AB-A11E026D08C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F8962D9-9AB4-4F48-9397-A63CC1286CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F8962D9-9AB4-4F48-9397-A63CC1286CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F8962D9-9AB4-4F48-9397-A63CC1286CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F8962D9-9AB4-4F48-9397-A63CC1286CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A59FDDE7-67E6-4CB9-B294-CF9C8D6C4616}
+	EndGlobalSection
+EndGlobal

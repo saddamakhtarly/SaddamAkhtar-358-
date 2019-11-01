@@ -1,0 +1,42 @@
+﻿@{ 
+    List<MainBannerModel> banners = new List<MainBannerModel> {
+                new MainBannerModel { Caption="aaaa aaaa", Details="aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaaa", ImageUrl="~/images/banners/01.jpg" },
+                new MainBannerModel { Caption="bbbb bb", Details="bbbbbbbbb bbbbbbbbb bbbbbbbbbbbb bbbbbbbbbbbbbb bbbbbbbbbbbbbbb", ImageUrl="~/images/banners/02.jpg" },
+                new MainBannerModel { Caption="ccccccccccccc", Details="ccccccccc ccccccccccccc cccccccccccc cccccccccc", ImageUrl="~/images/banners/03.jpg" },
+            };
+}
+
+
+<div id="mainbanner" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @for (int i = 0; i < banners.Count(); i++)
+        {
+            string active = (i == 0) ? "active" : "";
+            <li data-target="#mainbanner" data-slide-to="@i" class="@active"></li>
+        }
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @for (int i = 0; i < banners.Count(); i++)
+        {
+            string active = (i == 0) ? "active" : "";
+                <div class="item @active">
+                    <img src="@Url.Content(banners[i].ImageUrl)" alt="@banners[i].Caption" class="img-responsive" />
+                    <div class="carousel-caption">
+                        <h3>@banners[i].Caption</h3>
+                        <p>@banners[i].Details</p>
+                    </div>
+                </div>
+        }
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#mainbanner" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </a>
+    <a class="right carousel-control" href="#mainbanner" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+</div>

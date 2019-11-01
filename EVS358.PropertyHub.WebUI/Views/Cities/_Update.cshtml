@@ -1,0 +1,19 @@
+﻿@model CityModel
+
+<form asp-controller="Cities" asp-action="Update" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-edit"></span> </span>
+            <input asp-for="Name" type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span> </span>
+            <select class="form-control" asp-for="province.Id" asp-items="@ViewBag.Province"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp; Update</button>
+    </div>
+</form>

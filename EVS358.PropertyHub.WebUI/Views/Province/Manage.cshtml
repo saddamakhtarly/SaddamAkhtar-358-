@@ -1,0 +1,106 @@
+﻿@using Newtonsoft.Json
+@model IEnumerable<ProvinceModel>
+
+@{
+    ViewData["Title"] = "Manage Province";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    AlertModel alert = TempData.Get<AlertModel>("Alert");
+}
+
+<div id="dialog1" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="createdialog-header" class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h4 id="dialog1-title" class="modal-title"></h4>
+            </div>
+            <div id="dialog1-body" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (alert != null)
+{
+<div id="AlertView">
+    <partial name="~/Views/shared/_AlertView.cshtml" model="alert" />
+</div>
+    
+}
+
+<table class="table table-bordered">
+    <thead class="bg-primary">
+        <tr>
+            <th colspan="3">@ViewData["Title"] [ <a id="createlink" asp-controller="province" asp-action="create">Add New</a> ]</th>
+        </tr>
+        <tr>
+            <th class="col-lg-5">Province</th>
+            <th class="col-lg-3">Country</th>
+            <th class="col-lg-4">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="tblcontactsbody">
+        @foreach (var m in Model)
+        {
+            <tr class="dg-datarow" data-schemeid="@m.Id">
+                <td class="col-lg-5">@m.Name</td>
+                <td class="col-lg-3">@m.country.Name</td>
+                <td class="col-lg-4">
+                    <button class="btn btn-warning btn-sm dgbtn-edit"><span class="glyphicon glyphicon-edit"></span></button> &nbsp;
+                    <button class="btn btn-danger btn-sm dgbtn-delete"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+        $("#createlink").click(function (event) {
+            event.preventDefault();
+            $.ajax(
+                {
+                    url: "/Province/create"
+                }
+            ).done(function (createform) {
+                $("#dialog1-title").html("Add New Province");
+                $("#dialog1-body").html(createform);
+                $("#dialog1").modal();
+            });
+        });
+
+        $(".dgbtn-edit").click(function () {
+            var schemeid = $(this).parents(".dg-datarow").data("schemeid");
+            $.ajax(
+                {
+                    url: "/Province/update/" + schemeid
+                }
+            ).done(function (updateform) {
+                $("#dialog1-title").html("Edit Province");
+                $("#dialog1-body").html(updateform);
+                $("#dialog1").modal();
+               
+            });
+        });
+
+        $(".dgbtn-delete").click(function () {
+            var SchemeId = $(this).parents(".dg-datarow").data("schemeid");
+
+            $.ajax(
+                {
+                    url: "/Province/delete/" + SchemeId
+                }
+            ).done(function (deleteform) {
+                $("#dialog1-title").html("Delete Province");
+                $("#dialog1-body").html(deleteform);
+                $("#dialog1").modal();
+            });
+        });
+
+    </script>
+}
+
+
+
+
+
